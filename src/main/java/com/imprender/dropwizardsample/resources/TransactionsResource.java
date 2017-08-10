@@ -5,6 +5,7 @@ import com.imprender.dropwizardsample.model.User;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
@@ -19,33 +20,57 @@ public class TransactionsResource {
 	private List<User> users;
 
 	public TransactionsResource() {
-		users = new ArrayList<>();
 
-		users.add(new User("Ricardo", "11/03/1986", 200));
-		users.add(new User("Ferran", "11/03/1986", 200));
-		users.add(new User("Laia", "11/03/1986", 200));
-		users.add(new User("Xabi", "11/03/1986", 200));
-
+		users = User.load();
 		transactions = new ArrayList<>();
 
-		transactions.add(new Transaction(users.get(1), users.get(2), 22));
-		transactions.add(new Transaction(users.get(2), users.get(3), 22));
-		transactions.add(new Transaction(users.get(3), users.get(4), 22));
+		transactions.add(new Transaction(users.get(0), users.get(1), 32));
+		transactions.add(new Transaction(users.get(1), users.get(2), 23));
+		transactions.add(new Transaction(users.get(2), users.get(3), 21));
 	}
+
+
 
 	@GET
 	public String viewTransactions() {
-		String html = "<h1>Recommended books</h1>";
+		String html = "<h1>List of transactions</h1>";
 		html += "<ul>";
 
 		for (Transaction transaction : transactions) {
 
-			html += "<li>" + transaction.getGiver() + " gives " +
-					transaction.getAmount() + " bitcoins to " +
-					transaction.getReceiver() + "<li>";
+			html += "<li>" + transaction.getGiver().getNameLink() + " gives " +
+					transaction.getAmountLink() + " bitcoins to " +
+					transaction.getReceiver().getNameLink() + "</li>";
 		}
 		html += "</ul>";
+		html += goToMenu();
 
+		return html;
+	}
+
+	@GET
+	@Path("{id}")
+	public String viewTransactions(@PathParam("id") int id) {
+
+		Transaction transaction = transactions.get(id);
+
+		String html = "<h1>" + transaction.getGiver() + "  -----" + transaction.getAmount() + "----->  " + transaction.getReceiver() + "</h1>";
+		html += "<ul>Transaction information:" +
+				"<li><strong>Giver</strong>: " + transaction.getGiver() + "</li>" +
+				"<li><strong>Receiver</strong>: " + transaction.getReceiver() + "</li>" +
+				"<li><strong>Date</strong>: " + transaction.getDate() + "</li>" +
+				"<li><strong>Amount</strong>: " + transaction.getAmount() + "</li>" + "</ul>" +
+				"<br><br><br>" +
+				"<p>This transaction is " +
+				(transaction.isVerified() ? "" : "not ") +       //POR USAR ALGUNA VEZ ESTO....
+				"verified<br>";
+		html += goToMenu();
+		return html;
+	}
+
+	private String goToMenu() {
+		String html = "<a href=\"http://localhost:8080/users\">Go to users</a>";
+		html += "<br><a href=\"http://localhost:8080/transactions\">Go to transactions</a>";
 		return html;
 	}
 }

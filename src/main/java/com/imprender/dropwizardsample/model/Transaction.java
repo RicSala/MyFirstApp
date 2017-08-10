@@ -8,13 +8,18 @@ public class Transaction {
 	private int amount;
 	private Date date;
 	private boolean verified;
+	private static int index = 0;
+	private final int ID;
 
 	public Transaction(User giver, User receiver, int amount) {
 		this.giver = giver;
 		this.receiver = receiver;
 		this.amount = amount;
 		this.date = new Date();
+		this.ID = index;
+		index++;
 		verified = false;
+
 	}
 
 	public User getGiver() {
@@ -35,5 +40,9 @@ public class Transaction {
 
 	public boolean isVerified() {
 		return verified;
+	}
+
+	public String getAmountLink() {
+		return "<a href=\"http://localhost:8080/transactions/" + this.ID + "\">" + this.getAmount() + "</a>";
 	}
 }

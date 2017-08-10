@@ -12,7 +12,7 @@ import io.dropwizard.setup.Environment;
 
 
 public class MyApp extends Application<MyAppConfig> {
-
+//EXTIENDO LA CLASE APLICACIÓN PARA HEREDAR TODOS SUS MÉTODOS
 
 
 	public static void main(String[] args) throws Exception {
@@ -27,7 +27,7 @@ public class MyApp extends Application<MyAppConfig> {
 	}
 
 
-	//¿?
+	//¿? ES EL BOOTSTRAP DE HTML??
 	@Override
 	public void initialize(Bootstrap<MyAppConfig> bootstrap) {
 		//NOTING TO DO YET!
@@ -38,11 +38,12 @@ public class MyApp extends Application<MyAppConfig> {
 	@Override
 	public void run(MyAppConfig myAppConfig, Environment environment) throws Exception {
 
+		final UsersResource usersResource = new UsersResource();
+		environment.jersey().register(usersResource);  //TODO: ESTÁ REGISTRANDO EL RECURSO (LA URL???)
+
 		final TransactionsResource transactions = new TransactionsResource();
 		environment.jersey().register(transactions);  //TODO: ESTÁ REGISTRANDO EL RECURSO (LA URL???)
 
-		final UsersResource usersResource = new UsersResource();
-		environment.jersey().register(usersResource);  //TODO: ESTÁ REGISTRANDO EL RECURSO (LA URL???)
 
 	}
 
