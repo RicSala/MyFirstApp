@@ -12,13 +12,15 @@ public class User implements Serializable {
 	private static int index = 0;
 	private final int ID;
 	private String job;
+	private String imagePath;
 
-	public User(String name, String dateOfBirth, int funds, String job) {
+	public User(String name, String dateOfBirth, int funds, String job, String imagePath) {
 		this.name = name;
 		this.dateOfBirth = dateOfBirth;
 		this.funds = funds;
 		this.ID = index;
 		this.job = job;
+		this.imagePath = imagePath;
 		index++;
 	}
 
@@ -74,5 +76,13 @@ public class User implements Serializable {
 
 	public String getJob() {
 		return this.job;
+	}
+
+	public int getID() {
+		return ID;
+	}
+
+	public String getImagePath() {
+		return imagePath;
 	}
 }

@@ -45,4 +45,8 @@ public class Transaction {
 	public String getAmountLink() {
 		return "<a href=\"http://localhost:8080/transactions/" + this.ID + "\">" + this.getAmount() + "</a>";
 	}
+
+	public int getID() {
+		return ID;
+	}
 }

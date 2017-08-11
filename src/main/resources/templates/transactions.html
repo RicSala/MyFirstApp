@@ -1,0 +1,12 @@
+{{>header.html}}
+{{>nav.html}}
+
+
+<h1>List of transactions</h1>
+<ul>
+{{#Values}}
+    <li><a href="http://localhost:8080/users/{{Giver.ID}}">{{Giver}}</a> gives <a href="http://localhost:8080/transactions/{{ID}}">{{Amount}}</a> bitcoins to <a href="http://localhost:8080/users/{{Receiver.ID}}">{{Receiver}}</a></li>
+{{/Values}}
+</ul>
+
+{{>footer.html}}
