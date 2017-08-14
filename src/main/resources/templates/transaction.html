@@ -2,8 +2,8 @@
 {{>nav.html}}
 
 
-<h1>{{Values.Giver}} ----- {{Values.Amount}} bitcoins----->{{Values.Receiver}}</h1>
-<ul>Transaction information:
+<h1 class="transaction">{{Values.Giver}} ----- {{Values.Amount}} bitcoins----->{{Values.Receiver}}</h1>
+<ul class="transaction">Transaction information:
     <br><br><br>
     <li><strong>Giver</strong>: <a href="http://localhost:8080/users/{{Values.Giver.ID}}">{{Values.Giver}}</a></li>
     <li><strong>Receiver</strong>: <a href="http://localhost:8080/users/{{Values.Receiver.ID}}">{{Values.Receiver}}</a></li>

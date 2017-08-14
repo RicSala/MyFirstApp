@@ -1,21 +1,15 @@
 package com.imprender.dropwizardsample.controller;
 
 
-import com.github.mustachejava.DefaultMustacheFactory;
-import com.github.mustachejava.Mustache;
-import com.github.mustachejava.MustacheFactory;
 import com.imprender.dropwizardsample.model.User;
-import com.imprender.dropwizardsample.util.MustacheUtil;
+import com.imprender.webapputils.MustacheUtil;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.io.IOException;
-import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,24 +36,19 @@ public class UsersController {
 
 
 	@GET
-	public String viewUsers() throws IOException {
+	public String viewUsers() {
 
-		Map<String, String> headerValues = new HashMap<>();
-		headerValues.put("Title", "List of users");
-		headerValues.put("Style", "GeneralStyle.css");
-
-		return MustacheUtil.customizeTemplate(users, "templates/users.html", headerValues).toString();
+		Map<String, String> customizedHeader = MustacheUtil.customizeHeader("List of users", "GeneralStyle.css");
+		return MustacheUtil.customizeTemplate(users, customizedHeader, "templates/users.html").toString();
 	}
 
 	@GET
 	@Path("{id}")
-	public String viewUsers(@PathParam("id") int id) throws IOException {
+	public String viewUsers(@PathParam("id") int id) {
 
-		Map<String, String> headerValues = new HashMap<>();
-		headerValues.put("Title", "User information");
-		headerValues.put("Style", "Styles.css");
+		Map<String, String> customizedHeader = MustacheUtil.customizeHeader("User information", "GeneralStyle.css");
 
-		return MustacheUtil.customizeTemplate(users.get(id), "templates/profileCard.html", headerValues).toString();
+		return MustacheUtil.customizeTemplate(users.get(id), customizedHeader, "templates/profileCard.html").toString();
 	}
 
 

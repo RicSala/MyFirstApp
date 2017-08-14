@@ -2,7 +2,7 @@ package com.imprender.dropwizardsample.controller;
 
 import com.imprender.dropwizardsample.model.Transaction;
 import com.imprender.dropwizardsample.model.User;
-import com.imprender.dropwizardsample.util.MustacheUtil;
+import com.imprender.webapputils.MustacheUtil;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -11,7 +11,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,30 +35,19 @@ public class TransactionsController {
 
 
 	@GET
-	public String viewTransactions() throws IOException {
+	public String viewTransactions() {
 
-		Map<String, String> headerValues = new HashMap<>();
-		headerValues.put("Title", "List Of Transactions");
-		headerValues.put("Style", "GeneralStyle.css");
+		Map<String, String> headerMap = MustacheUtil.customizeHeader("List Of Transactions", "GeneralStyle.css");
 
-		return MustacheUtil.customizeTemplate(transactions, "templates/transactions.html", headerValues).toString();
+		return MustacheUtil.customizeTemplate(transactions, headerMap, "templates/transactions.html").toString();
 
 	}
 
 	@GET
 	@Path("{id}")
-	public String viewTransactions(@PathParam("id") int id) throws IOException {
+	public String viewTransactions(@PathParam("id") int id) {
 
-		Map<String, String> headerValues = new HashMap<>();
-		headerValues.put("Title", "Transaction information");
-		headerValues.put("Style", "GeneralStyle.css");
-
-		return MustacheUtil.customizeTemplate(transactions.get(id), "templates/transaction.html", headerValues).toString();
+		return MustacheUtil.customizeTemplate(transactions.get(id), MustacheUtil.customizeHeader("Transaction information", "GeneralStyle.css"), "templates/transaction.html").toString();
 	}
 
-	private String goToMenu() {
-		String html = "<a href=\"http://localhost:8080/users\">Go to users</a>";
-		html += "<br><a href=\"http://localhost:8080/transactions\">Go to transactions</a>";
-		return html;
-	}
 }

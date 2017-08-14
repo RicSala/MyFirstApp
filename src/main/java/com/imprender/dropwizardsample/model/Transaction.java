@@ -16,9 +16,9 @@ public class Transaction {
 		this.receiver = receiver;
 		this.amount = amount;
 		this.date = new Date();
+		verified = false;
 		this.ID = index;
 		index++;
-		verified = false;
 
 	}
 
