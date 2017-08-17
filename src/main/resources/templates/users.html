@@ -3,10 +3,14 @@
 
 
 <h1>Users:</h1>
+
+<input class="search" type="text" placeholder="Search user">
+<button class="search">Search</button>
+
 <ul>
-    {{#Values}}  <!--ITERADOR-->
-    <li><a href="http://localhost:8080/users/{{ID}}">{{Name}}</a> </li>
-    {{/Values}}
+    {{#Values.userList}}
+    <li><a href="http://localhost:8080/users/{{ID}}">{{name}}</a> </li>
+    {{/Values.userList}}
 </ul>
 
 {{>footer.html}}

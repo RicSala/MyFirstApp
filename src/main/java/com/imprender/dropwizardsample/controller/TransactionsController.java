@@ -1,7 +1,7 @@
 package com.imprender.dropwizardsample.controller;
 
 import com.imprender.dropwizardsample.model.Transaction;
-import com.imprender.dropwizardsample.model.User;
+import com.imprender.dropwizardsample.model.UserList;
 import com.imprender.webapputils.MustacheUtil;
 
 import javax.ws.rs.GET;
@@ -9,7 +9,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -20,11 +19,11 @@ import java.util.Map;
 public class TransactionsController {
 
 	private List<Transaction> transactions;
-	private List<User> users;
+	private UserList users;
 
 	public TransactionsController() {
 
-		users = User.load();
+		users = UserList.load();
 		transactions = new ArrayList<>();
 
 		transactions.add(new Transaction(users.get(0), users.get(1), 32));
