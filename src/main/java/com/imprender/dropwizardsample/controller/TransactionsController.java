@@ -2,7 +2,7 @@ package com.imprender.dropwizardsample.controller;
 
 import com.imprender.dropwizardsample.model.Transaction;
 import com.imprender.dropwizardsample.model.UserList;
-import com.imprender.webapputils.MustacheUtil;
+import com.imprender.dropwizardsample.util.MustacheUtil;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
