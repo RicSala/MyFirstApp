@@ -4,26 +4,27 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserList implements Serializable{
-	private List<User> usersList;
+public class UserList implements Serializable {
+	private List<User> userList;
 
 	public UserList() {
-		 usersList = new ArrayList<>();
+
+		userList = new ArrayList<>();
 	}
 
-	public List<User> getUsersList() {
-		return usersList;
+	public List<User> getUserList() {
+		return userList;
 	}
 
 	public void add(User user) {
-		usersList.add(user);
+		userList.add(user);
 	}
 
 	public UserList match(String query) {
 		UserList results = new UserList();
 
-		for (User userIterator : usersList) {
-			if (userIterator.getName().equals(query)) {
+		for (User userIterator : userList) {
+			if (userIterator.getName().contains(query)) {
 				results.add(userIterator);
 			}
 		}
@@ -32,11 +33,11 @@ public class UserList implements Serializable{
 	}
 
 	public int size() {
-		return usersList.size();
+		return userList.size();
 	}
 
 	public User get(int id) {
-		return usersList.get(id);
+		return userList.get(id);
 	}
 
 	public static void save(UserList users) {
